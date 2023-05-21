@@ -67,13 +67,13 @@ class Document {
   }
 
   List<Block> getBlocks() {
-    if (_json.containsKey('blocks')) {
-      final blocksJson = _json['blocks'];
-      if (blocksJson is List) {
-        return blocksJson.map((block) => Block.fromJson(block)).toList();
-      } else {
-        throw const FormatException('Unexpected JSON format');
-      }
+    if (_json
+        case {
+          'blocks': List blocksJson,
+        }) {
+      return <Block>[
+        for (final blockJson in blocksJson) Block.fromJson(blockJson),
+      ];
     } else {
       throw const FormatException('Unexpected JSON format');
     }
