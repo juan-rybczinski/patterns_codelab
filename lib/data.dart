@@ -50,15 +50,20 @@ class Document {
   Document() : _json = jsonDecode(documentJson);
 
   (String, {DateTime modified}) getMetadata() {
-    if (_json.containsKey('metadata')) {
-      var metadataJson = _json['metadata'];
-      if (metadataJson is Map) {
-        var title = metadataJson['title'] as String;
-        var localModified = DateTime.parse(metadataJson['modified'] as String);
-        return (title, modified: localModified);
-      }
+    if (_json
+        case {
+          'metadata': {
+            'title': String title,
+            'modified': String localModified,
+          }
+        }) {
+      return (
+        title,
+        modified: DateTime.parse(localModified),
+      );
+    } else {
+      throw const FormatException('Unexpected JSON');
     }
-    throw const FormatException('Unexpected JSON');
   }
 
   List<Block> getBlocks() {
