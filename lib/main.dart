@@ -36,7 +36,7 @@ class DocumentScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(metadata.title),
+        title: Text(metadata.$1),
       ),
       body: Column(
         children: [
