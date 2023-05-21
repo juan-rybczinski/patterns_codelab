@@ -98,12 +98,9 @@ class BlockWidget extends StatelessWidget {
     // switch (block.type) {
     //   case 'h1':
     //     textStyle = Theme.of(context).textTheme.displayMedium;
-    //     break;
-    //   case 'p':
-    //   case 'checkbox':
+    //   case 'p' || 'checkbox':
     //     textStyle = Theme.of(context).textTheme.bodyMedium;
-    //     break;
-    //   default:
+    //   case _:
     //     textStyle = Theme.of(context).textTheme.bodySmall;
     // }
   }
