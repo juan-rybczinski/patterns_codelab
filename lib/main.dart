@@ -95,14 +95,12 @@ class BlockWidget extends StatelessWidget {
       throw Exception('Unexpected block');
     }
 
-    // switch (block.type) {
-    //   case 'h1':
-    //     textStyle = Theme.of(context).textTheme.displayMedium;
-    //   case 'p' || 'checkbox':
-    //     textStyle = Theme.of(context).textTheme.bodyMedium;
-    //   case _:
-    //     textStyle = Theme.of(context).textTheme.bodySmall;
-    // }
+    // TextStyle? textStyle;
+    // textStyle = switch (block.type) {
+    //   'h1' => Theme.of(context).textTheme.displayMedium,
+    //   'p' || 'checkbox' => Theme.of(context).textTheme.bodyMedium,
+    //   _ => Theme.of(context).textTheme.bodySmall
+    // };
   }
 }
 
