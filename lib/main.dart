@@ -108,15 +108,13 @@ String formatDate(DateTime dateTime) {
   var today = DateTime.now();
   var difference = dateTime.difference(today);
 
-  if (difference.inDays == 0) {
-    return 'today';
-  } else if (difference.inDays == 1) {
-    return 'tomorrow';
-  } else if (difference.inDays == -1) {
-    return 'yesterday';
-  } else if (difference.isNegative) {
-    return '${difference.inDays.abs()} days ago';
-  } else {
-    return '${difference.inDays} days from now';
-  }
+  return switch (difference) {
+    Duration(inDays: 0) => 'today',
+    Duration(inDays: 1) => 'tomorrow',
+    Duration(inDays: -1) => 'yesterday',
+    Duration(inDays: var days) when days > 7 => '${days ~/ 7} weeks from now',
+    Duration(inDays: var days) when days < -7 => '${days.abs() ~/ 7} weeks ago',
+    Duration(inDays: var days, isNegative: true) => '${days.abs()} days ago',
+    Duration(inDays: var days) => '$days days from now',
+  };
 }
