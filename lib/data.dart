@@ -1,15 +1,5 @@
 import 'dart:convert';
 
-class MetaData {
-  final String title;
-  final DateTime modified;
-
-  MetaData({
-    required this.title,
-    required this.modified,
-  });
-}
-
 class Block {
   Block();
 

@@ -30,13 +30,13 @@ class DocumentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final metadata = document.getMetadata();
-    final formattedModifiedDate = formatDate(metadata.modified);
+    final (title, :modified) = document.getMetadata();
+    final formattedModifiedDate = formatDate(modified);
     final blocks = document.getBlocks();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(metadata.$1),
+        title: Text(title),
       ),
       body: Column(
         children: [
