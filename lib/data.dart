@@ -1,22 +1,16 @@
 import 'dart:convert';
 
-class Block {
+sealed class Block {
   Block();
 
   factory Block.fromJson(Map<String, dynamic> json) {
-    if (json.containsKey('type') && json.containsKey('text')) {
-      if (json['type'] == 'h1') {
-        return HeaderBlock(text: json['text']);
-      } else if (json['type'] == 'p') {
-        return ParagraphBlock(text: json['text']);
-      } else if (json['type'] == 'checkbox' && json.containsKey('checked')) {
-        return CheckboxBlock(text: json['text'], isChecked: json['checked']);
-      } else {
-        throw const FormatException('Unexpected JSON format');
-      }
-    } else {
-      throw const FormatException('Unexpected JSON format');
-    }
+    return switch (json) {
+      {'type': 'h1', 'text': String text} => HeaderBlock(text: text),
+      {'type': 'p', 'text': String text} => ParagraphBlock(text: text),
+      {'type': 'checkbox', 'text': String text, 'checked': bool checked} =>
+          CheckboxBlock(text: text, isChecked: checked),
+      _ => throw const FormatException('Unexpected JSON format'),
+    };
   }
 }
 

@@ -65,35 +65,22 @@ class BlockWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (block is HeaderBlock) {
-      final headerBlock = block as HeaderBlock;
-      return Container(
-        margin: const EdgeInsets.all(8.0),
-        child: Text(
-          headerBlock.text,
+    return Container(
+      margin: const EdgeInsets.all(8),
+      child: switch (block) {
+        HeaderBlock(:final text) => Text(
+          text,
           style: Theme.of(context).textTheme.displayMedium,
         ),
-      );
-    } else if (block is ParagraphBlock) {
-      final paragraphBlock = block as ParagraphBlock;
-      return Container(
-        margin: const EdgeInsets.all(8.0),
-        child: Text(paragraphBlock.text),
-      );
-    } else if (block is CheckboxBlock) {
-      final checkboxBlock = block as CheckboxBlock;
-      return Container(
-        margin: const EdgeInsets.all(8.0),
-        child: Row(
+        ParagraphBlock(:final text) => Text(text),
+        CheckboxBlock(:final text, :final isChecked) => Row(
           children: [
-            Checkbox(value: checkboxBlock.isChecked, onChanged: (_) {}),
-            Text(checkboxBlock.text),
+            Checkbox(value: isChecked, onChanged: (_) {}),
+            Text(text),
           ],
         ),
-      );
-    } else {
-      throw Exception('Unexpected block');
-    }
+      },
+    );
 
     // TextStyle? textStyle;
     // textStyle = switch (block.type) {
